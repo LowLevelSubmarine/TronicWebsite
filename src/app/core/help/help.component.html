@@ -1,0 +1,35 @@
+<div *ngIf="(user|async) && (guild|async)">
+    <p> Commands for {{(user|async).name}} on Server {{(guild|async).guildName}}</p>
+</div>
+<div *ngIf="(response$|async)">
+    <h2>Music</h2>
+    <div *ngFor="let command of (response$ |async).music">
+        <p>{{command.title}}</p>
+        <p>{{command.description}}</p>
+        <p>{{(guild|async).prefix}}{{command.syntax}}</p>
+    </div>
+    <h2>Fun</h2>
+    <div *ngFor="let command of (response$ |async).fun">
+        <p>{{command.title}}</p>
+        <p>{{command.description}}</p>
+        <p>{{(guild|async).prefix}}{{command.syntax}}</p>
+    </div>
+    <h2>Info</h2>
+    <div *ngFor="let command of (response$ |async).info">
+        <p>{{command.title}}</p>
+        <p>{{command.description}}</p>
+        <p>{{(guild|async).prefix}}{{command.syntax}}</p>
+    </div>
+    <h2>Administration</h2>
+    <div *ngFor="let command of (response$ |async).administration">
+        <p>{{command.title}}</p>
+        <p>{{command.description}}</p>
+        <p>{{(guild|async).prefix}}{{command.syntax}}</p>
+    </div>
+    <h2>Settings</h2>
+    <div *ngFor="let command of (response$ |async).settings">
+        <p>{{command.title}}</p>
+        <p>{{command.description}}</p>
+        <p>{{(guild|async).prefix}}{{command.syntax}}</p>
+    </div>
+</div>
