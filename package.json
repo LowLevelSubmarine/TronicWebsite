@@ -8,6 +8,7 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
+    "buildprod": "ng build --prod",
     "docker-push": "docker build -t docker.pkg.github.com/lowlevelsubmarine/tronicwebsite/website:0.0.1 ./  && docker push docker.pkg.github.com/lowlevelsubmarine/tronicwebsite/website:0.0.1"
   },
   "private": true,
