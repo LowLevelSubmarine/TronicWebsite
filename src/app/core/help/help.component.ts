@@ -1,8 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import {ChangeDetectorRef, Component, NgZone, OnInit} from '@angular/core';
 import {HelpResponse, HelpService} from '../services/help.service';
 import {ActivatedRoute, Route, Router} from '@angular/router';
-import {Observable} from 'rxjs';
+import {EMPTY, Observable, throwError} from 'rxjs';
 import {Guild, JDAService, User} from '../services/jda.service';
+import {catchError, map} from 'rxjs/operators';
+import {HttpErrorResponse} from '@angular/common/http';
+import {ChangeDetection} from '@angular/cli/lib/config/schema';
 
 @Component({
   selector: 'app-help',
@@ -13,17 +16,56 @@ export class HelpComponent implements OnInit {
   response$:Observable<HelpResponse>;
   guild:Observable<Guild>;
   user:Observable<User>;
-  constructor(private helpService:HelpService,private route:ActivatedRoute,private jdaService:JDAService) { }
+  errorMessage ="";
+  constructor(private helpService:HelpService,private route:ActivatedRoute,private jdaService:JDAService,protected changeDetector:ChangeDetectorRef) { }
 
   ngOnInit(): void {
     let token:string =this.route.snapshot.queryParamMap.get("token");
     if(token) {
-     this.response$ = this.helpService.getCustomHelp(token);
-     this.guild = this.jdaService.getGuild(token);
-     this.user = this.jdaService.getUser(token);
+     this.response$ = this.helpService.getCustomHelp(token).pipe(
+         catchError(err => {
+             this.handleError(err);
+             this.changeDetector.detectChanges();
+             this.response$ = this.helpService.getGenericHelp();
+             return EMPTY;
+         })
+     );
+     this.guild = this.jdaService.getGuild(token).pipe(
+         catchError(err => {
+             this.handleError(err);
+             this.changeDetector.detectChanges();
+             return EMPTY;
+         })
+     );
+     this.user = this.jdaService.getUser(token).pipe(
+         catchError(err => {
+             this.handleError(err);
+             this.changeDetector.detectChanges();
+             return EMPTY;
+         })
+     );;
     } else {
-     this.response$ = this.helpService.getGenericHelp();
+         this.response$ = this.helpService.getGenericHelp().pipe(
+             catchError(err => {
+                 this.handleError(err);
+                 this.changeDetector.detectChanges();
+                 return EMPTY;
+             })
+        );
+        this.changeDetector.detectChanges();
     }
   }
 
+  public getPrefix(guild:Guild) {
+      return (guild!=null&& guild.prefix!=null)? guild.prefix:"";
+  }
+
+  private handleError(error:HttpErrorResponse) {
+      console.log(error);
+      if (error.status == 0) {
+          this.errorMessage = " Can not connect to TronicBot! Please check your internet connection!";
+      } else {
+          this.errorMessage = error.status+" "+error.statusText;
+      }
+  }
 }

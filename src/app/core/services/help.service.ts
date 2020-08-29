@@ -24,14 +24,15 @@ export interface Command {
 
 export class HelpService {
 
-  constructor(private http:HttpClient) { }
-
-  public getGenericHelp():Observable<HelpResponse> {
-    return this.http.get<HelpResponse>(environment.url+"/help");
+  constructor(private http: HttpClient) {
   }
 
-  public getCustomHelp(jwtToken:string):Observable<HelpResponse> {
-    let params: HttpParams = new HttpParams().set("token",jwtToken);
-    return this.http.get<HelpResponse>(environment.url+"help", {params:params});
+  public getGenericHelp(): Observable<HelpResponse> {
+    return this.http.get<HelpResponse>(environment.url + "help");
+  }
+
+  public getCustomHelp(jwtToken: string): Observable<HelpResponse> {
+    let params: HttpParams = new HttpParams().set("token", jwtToken);
+    return this.http.get<HelpResponse>(environment.url + "help", {params: params});
   }
 }
