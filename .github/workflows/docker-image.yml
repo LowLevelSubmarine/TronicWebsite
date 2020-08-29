@@ -21,5 +21,6 @@ jobs:
         password: ${{ secrets.GITHUB_TOKEN }}
         registry: docker.pkg.github.com
         repository: lowlevelsubmarine/tronicwebsite/tronic
+        tags: "${GITHUB_SHA}"
         #tag_with_ref: true
 
