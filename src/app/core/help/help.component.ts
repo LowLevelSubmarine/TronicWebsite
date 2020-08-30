@@ -6,6 +6,7 @@ import {Guild, JDAService, User} from '../services/jda.service';
 import {catchError, map} from 'rxjs/operators';
 import {HttpErrorResponse} from '@angular/common/http';
 import {ChangeDetection} from '@angular/cli/lib/config/schema';
+import {BotService} from '../services/bot.service';
 
 @Component({
   selector: 'app-help',
@@ -17,7 +18,8 @@ export class HelpComponent implements OnInit {
   guild:Observable<Guild>;
   user:Observable<User>;
   errorMessage ="";
-  constructor(private helpService:HelpService,private route:ActivatedRoute,private jdaService:JDAService,protected changeDetector:ChangeDetectorRef) { }
+  prefix="";
+  constructor(private helpService:HelpService,private route:ActivatedRoute,private jdaService:JDAService,private changeDetector:ChangeDetectorRef,private botService:BotService) { }
 
   ngOnInit(): void {
     let token:string =this.route.snapshot.queryParamMap.get("token");
@@ -54,10 +56,13 @@ export class HelpComponent implements OnInit {
         );
         this.changeDetector.detectChanges();
     }
+    this.botService.getBotData().subscribe(next=>{
+        this.prefix = next.defaultPrefix
+    });
   }
 
   public getPrefix(guild:Guild) {
-      return (guild!=null&& guild.prefix!=null)? guild.prefix:"";
+      return (guild!=null&& guild.prefix!=null)? guild.prefix:this.prefix;
   }
 
   private handleError(error:HttpErrorResponse) {
