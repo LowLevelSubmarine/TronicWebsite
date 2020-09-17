@@ -4,9 +4,9 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import {HttpClientModule} from '@angular/common/http';
-import {CommonModule} from '@angular/common';
 import {CoreModule} from './core/core.module';
-import {HelpComponent} from './core/help/help.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {ClarityModule} from '@clr/angular';
 
 @NgModule({
   declarations: [
@@ -17,6 +17,9 @@ import {HelpComponent} from './core/help/help.component';
     CoreModule,
     AppRoutingModule,
     HttpClientModule,
+    ClarityModule,
+    BrowserAnimationsModule,
+    ClarityModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

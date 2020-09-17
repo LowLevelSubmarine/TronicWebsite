@@ -1,0 +1,16 @@
+@import "src/styles";
+
+body {
+ display: flex;
+ flex-wrap:nowrap;
+}
+
+#content {
+ margin-left: 300px;
+ position: fixed;
+ height: 100%;
+ width: 100%;
+ background: $color linear-gradient(90deg, rgba(105,37,115,0.4) 0%, rgba(143,41,158,1) 10%);
+}
+
+

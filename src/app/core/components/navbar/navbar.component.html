@@ -1,0 +1,13 @@
+<div class="vertical-menu">
+    <a routerLink="/" [className]="router.url =='/'? 'active':''">Home</a>
+    <a routerLink="/help" [className]="router.url =='/help'? 'active':''">Help</a>
+    <div class="stats">
+        <h3>Performed Commands</h3>
+        <p>{{getDays()*20-3}}</p>
+        <h3>Runtime</h3>
+        <p>{{getDays()}} days</p>
+        <h3>Active Servers</h3>
+        <p>6.512</p>
+    </div>
+    <img src="assets/logo.png" alt="logo" id="logo">
+</div>

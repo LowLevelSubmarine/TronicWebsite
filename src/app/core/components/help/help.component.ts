@@ -1,12 +1,11 @@
 import {ChangeDetectorRef, Component, NgZone, OnInit} from '@angular/core';
-import {HelpResponse, HelpService} from '../services/help.service';
+import {HelpResponse, HelpService} from '../../services/help.service';
 import {ActivatedRoute, Route, Router} from '@angular/router';
 import {EMPTY, Observable, throwError} from 'rxjs';
-import {Guild, JDAService, User} from '../services/jda.service';
+import {Guild, JDAService, User} from '../../services/jda.service';
 import {catchError, map} from 'rxjs/operators';
 import {HttpErrorResponse} from '@angular/common/http';
-import {ChangeDetection} from '@angular/cli/lib/config/schema';
-import {BotService} from '../services/bot.service';
+import {BotService} from '../../services/bot.service';
 
 @Component({
   selector: 'app-help',
@@ -45,7 +44,7 @@ export class HelpComponent implements OnInit {
              this.changeDetector.detectChanges();
              return EMPTY;
          })
-     );;
+     );
     } else {
          this.response$ = this.helpService.getGenericHelp().pipe(
              catchError(err => {
@@ -56,7 +55,9 @@ export class HelpComponent implements OnInit {
         );
         this.changeDetector.detectChanges();
     }
-    this.botService.getBotData().subscribe(next=>{
+    this.botService.getBotData().pipe(
+        catchError(() => {return EMPTY})
+    ).subscribe(next=>{
         this.prefix = next.defaultPrefix
     });
   }
@@ -66,7 +67,6 @@ export class HelpComponent implements OnInit {
   }
 
   private handleError(error:HttpErrorResponse) {
-      console.log(error);
       if (error.status == 0) {
           this.errorMessage = " Can not connect to TronicBot! Please check your internet connection!";
       } else {
