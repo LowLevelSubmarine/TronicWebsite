@@ -1,6 +1,7 @@
 <div class="vertical-menu">
-    <a routerLink="/" [className]="router.url =='/'? 'active':''">Home</a>
-    <a routerLink="/help" [className]="router.url =='/help'? 'active':''">Help</a>
+    <a routerLink="/" [className]="getSite()=='/'? 'active':''">Home</a>
+    <a routerLink="/help" [className]="getSite() =='/help'? 'active':''">Commands</a>
+    <a routerLink="/invite" [className]="getSite() =='/invite'? 'active':''">Invite</a>
     <div class="stats">
         <h3>Performed Commands</h3>
         <p>{{getDays()*20-3}}</p>

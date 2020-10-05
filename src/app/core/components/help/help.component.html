@@ -1,45 +1,62 @@
-<app-title title="Command"></app-title>
-<p *ngIf="errorMessage!=''"> {{errorMessage}}</p>
-<div *ngIf="(user|async) as user">
-    <!--Idk dirty fix -->
-    <div *ngIf="(guild|async) as guild">
-        <p> Commands for {{user.name}} on Server {{guild.guildName}}</p>
-    </div>
-</div>
-<div *ngIf="(response$|async) as help;else loading">
-    <div *ngIf="help.music">
-        <h2>Music</h2>
-        <div class="flex">
-            <div *ngFor="let command of help.music">
-                <app-help-item [syntax]="getPrefix(guild|async)+command.syntax" [title]="command.title" [description]="command.description"></app-help-item>
+<div id="page">
+    <app-title title="Commands"></app-title>
+    <div id="scrollarea">
+        <ng-scrollbar track="all">
+            <p *ngIf="errorMessage!=''"> {{errorMessage}}</p>
+            <div *ngIf="(user|async) as user">
+                <!--Idk dirty fix -->
+                <div *ngIf="(guild|async) as guild">
+                    <p> Commands for <span style="font-weight: bold">{{user.name}}</span> on Server <span style="font-weight: bold">{{guild.guildName}}</span></p>
+                </div>
             </div>
-        </div>
+            <div *ngIf="(response$|async) as help;else loading">
+                <div *ngIf="help.music">
+                    <h2>Music</h2>
+                    <div class="grid-container">
+                        <div *ngFor="let command of help.music">
+                            <app-help-item [syntax]="getPrefix(guild|async)+command.syntax" [title]="command.title" [description]="command.description"></app-help-item>
+                        </div>
+                    </div>
+                </div>
+                <div *ngIf="help.fun">
+                    <h2>Fun</h2>
+                    <div class="grid-container">
+                        <div *ngFor="let command of help.fun">
+                            <app-help-item [syntax]="getPrefix(guild|async)+command.syntax" [title]="command.title" [description]="command.description"></app-help-item>
+                        </div>
+                    </div>
+
+                </div>
+                <div *ngIf="help.info">
+                    <h2>Info</h2>
+                    <div class="grid-container">
+                        <div *ngFor="let command of help.info">
+                            <app-help-item [syntax]="getPrefix(guild|async)+command.syntax" [title]="command.title" [description]="command.description"></app-help-item>
+                        </div>
+                    </div>
+                </div>
+                <div *ngIf="help.administration">
+                    <h2>Administration</h2>
+                    <div class="grid-container">
+                        <div *ngFor="let command of help.administration">
+                            <app-help-item [syntax]="getPrefix(guild|async)+command.syntax" [title]="command.title" [description]="command.description"></app-help-item>
+                        </div>
+                    </div>
+                </div>
+                <div *ngIf="help.settings">
+                    <h2>Settings</h2>
+                    <div class="grid-container">
+                        <div *ngFor="let command of help.settings">
+                            <app-help-item [syntax]="getPrefix(guild|async)+command.syntax" [title]="command.title" [description]="command.description"></app-help-item>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <ng-template #loading>
+                <p *ngIf="errorMessage==''">Loading ...</p>
+            </ng-template>
+        </ng-scrollbar>
     </div>
-    <div *ngIf="help.fun">
-        <h2>Fun</h2>
-        <div *ngFor="let command of help.fun">
-            <app-help-item [syntax]="getPrefix(guild|async)+command.syntax" [title]="command.title" [description]="command.description"></app-help-item>
-        </div>
-    </div>
-    <div *ngIf="help.info">
-        <h2>Info</h2>
-        <div *ngFor="let command of help.info">
-            <app-help-item [syntax]="getPrefix(guild|async)+command.syntax" [title]="command.title" [description]="command.description"></app-help-item>
-        </div>
-    </div>
-    <div *ngIf="help.administration">
-        <h2>Administration</h2>
-        <div *ngFor="let command of help.administration">
-            <app-help-item [syntax]="getPrefix(guild|async)+command.syntax" [title]="command.title" [description]="command.description"></app-help-item>
-        </div>
-    </div>
-    <div *ngIf="help.settings">
-        <h2>Settings</h2>
-        <div *ngFor="let command of help.settings">
-            <app-help-item [syntax]="getPrefix(guild|async)+command.syntax" [title]="command.title" [description]="command.description"></app-help-item>
-        </div>
-    </div>
+
 </div>
-<ng-template #loading>
-    <p *ngIf="errorMessage==''">Loading ...</p>
-</ng-template>

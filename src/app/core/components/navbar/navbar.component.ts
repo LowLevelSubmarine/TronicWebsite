@@ -8,7 +8,7 @@ import {Router, RouterStateSnapshot} from '@angular/router';
 })
 export class NavbarComponent implements OnInit {
 
-  constructor(public router: Router) { }
+  constructor(public router: Router) {}
 
   ngOnInit(): void {
   }
@@ -19,6 +19,11 @@ export class NavbarComponent implements OnInit {
     const today:any = new Date();
 
     return  Math.round(Math.abs((today - firstDate) / oneDay));
+  }
+
+  getSite(): string {
+    let index = this.router.url.indexOf("?")
+    return index == -1? this.router.url: this.router.url.substr(0,index)
   }
 
 }

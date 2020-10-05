@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  url:"http://localhost:8080/"
+  url:"http://localhost:8080/",
+  invitelink: "https://discord.com/oauth2/authorize?scope=bot&client_id=554803884439240705&permissions=8"
 };
 
 /*

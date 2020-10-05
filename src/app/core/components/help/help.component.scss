@@ -4,8 +4,36 @@
 }
 
 
-.flex {
-  display: flex;
-  flex-wrap: wrap;
-  max-width: 0vw;
+.grid-container {
+  display: grid;
+  grid-template-columns: 30vw 30vw;
+  grid-gap: 4vh;
 }
+
+#page {
+  margin-left: 2vw;
+}
+
+#scrollarea {
+  height: 88vh;
+  width: calc(100% - 300px);
+}
+
+#scrollarea :last-child {
+  margin-bottom: 2vh;
+}
+
+h2 {
+  font-weight: bold;
+  font-size: 2rem;
+  margin-top: 4vh;
+  margin-bottom: 2vh;
+}
+
+ng-scrollbar {
+  --scrollbar-size: 4px;
+  --scrollbar-thumb-color: rgba(255, 255, 255, 0.5);
+  --scrollbar-thumb-hover-color: #ffffff;
+}
+
+

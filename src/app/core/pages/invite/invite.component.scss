@@ -1,0 +1,23 @@
+@import "src/styles";
+#page {
+  margin-left: 2vw;
+}
+p {
+  color: white;
+}
+ .btn {
+   background-color: white;
+   border-color: white;
+   color: $color;
+   margin-top: 2vh;
+ }
+
+.btn-primary:hover {
+  background-color: $color;
+  color: white;
+}
+
+.btn-primary {
+  background-color: white;
+  color: $color;
+}

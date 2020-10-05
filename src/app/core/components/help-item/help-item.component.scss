@@ -1,21 +1,32 @@
 #help-item {
   background-color: rgba(255,255,255,0.05);
-  margin-bottom: 2vh;
   width: 30vw;
+  height: auto;
   max-width: 30vw;
   border-radius: 10px;
+  padding-left: 1vw;
+  padding-bottom: 1vw;
 }
 
 p {
   color: white;
+  margin: 1vh 0 0;
 }
 
 #title {
+  margin-left: -1vw;
+  padding-left: 1vw;
   background-color: rgba(255,255,255,0.1);
   border-radius: 10px 10px 0 0 ;
-  height: 4vh;
+  height: 5vh;
 }
 
 #title p {
+  font-weight: bold;
+  line-height: 5vh;
+  font-size: large;
+  margin: 0 0 0 0 ;
+}
+#ctitle {
   font-weight: bold;
 }
